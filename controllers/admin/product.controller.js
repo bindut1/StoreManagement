@@ -5,6 +5,7 @@ const filterStatusHelper = require("../../helpers/filterstatus");
 
 const searchHelper = require("../../helpers/search");
 
+const paginationHelper = require("../../helpers/pagination");
 // [GET] /admin/products
 
 module.exports.index = async (req, res) => {
@@ -12,19 +13,33 @@ module.exports.index = async (req, res) => {
     let find = {
         // deleted: false
     };
-    
+
     const filterStatus = filterStatusHelper(req.query);
-    
+
     if (req.query.status) {
         find.status = req.query.status;
     }
 
     const objSearch = searchHelper(req.query);
-    if(objSearch.regex){
+    if (objSearch.regex) {
         find.title = objSearch.regex;
     }
 
-    const products = await Product.find(find);
+    //Pagination
+    const countProduct = await Product.countDocuments(find);
+
+    let objPagination = paginationHelper(
+        {
+            currentPage: 1,
+            limitItem: 4
+        },
+        req.query,
+        countProduct
+    );
+
+    //End Pagination
+
+    const products = await Product.find(find).limit(objPagination.limitItem).skip(objPagination.skip);
 
     console.log(products);
 
@@ -32,6 +47,7 @@ module.exports.index = async (req, res) => {
         pageTitle: "Danh sach san pham",
         products: products,
         filterStatus: filterStatus,
-        keyword: objSearch.keyword
+        keyword: objSearch.keyword,
+        pagination: objPagination
     });
 }
