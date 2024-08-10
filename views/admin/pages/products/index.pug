@@ -41,10 +41,29 @@ block main
                             td #{item.price}$
                             td 
                                 if(item.status == "active")
-                                    | Hoat dong
+                                    a(
+                                        href="javascript:;"
+                                        data-status=item.status 
+                                        data-id=item.id 
+                                        button-change-status 
+                                        class="badge bg-success"
+                                        ) Hoat dong
                                 else 
-                                    | Dung hoat dong
+                                    a(
+                                        href="javascript:;"
+                                        data-status=item.status 
+                                        data-id=item.id 
+                                        button-change-status  
+                                        class="badge bg-danger"
+                                        ) Dung hoat dong
                             td 
                                 button(class="btn btn-warning btn-sm") Sua 
                                 button(class="btn btn-danger btn-sm ml-l") Xoa 
     +pagination(pagination)
+    form(
+        action="" 
+        method="POST"
+        id="form-change-status"
+        data-path=`${prefixAdmin}/products/change-status`
+        ) 
+    script(src="/admin/js/product.js") 
