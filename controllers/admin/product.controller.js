@@ -10,7 +10,7 @@ const paginationHelper = require("../../helpers/pagination");
 module.exports.index = async (req, res) => {
   console.log(req.query.status);
   let find = {
-    // deleted: false
+    deleted: false,
   };
 
   const filterStatus = filterStatusHelper(req.query);
@@ -82,6 +82,10 @@ module.exports.changeMulti = async (req, res) => {
 // [DELETE] /admin/products/delete/:id
 module.exports.deleteItem = async (req, res) => {
   const id = req.params.id;
-  await Product.deleteOne({ _id: id });
+  // await Product.deleteOne({ _id: id });
+  await Product.updateOne(
+    { _id: id },
+    { deleted: true, deletedAt: new Date() }
+  );
   res.redirect("back");
 };
