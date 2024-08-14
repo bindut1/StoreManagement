@@ -102,6 +102,15 @@ if (formChangeMulti) {
     const inputsChecked = checkboxMulti.querySelectorAll(
       "input[name='id']:checked"
     );
+    const typeChoice = e.target.elements.type.value;
+    if (typeChoice == "delete-all") {
+      const isConfirm = confirm(
+        "Ban co chac chan muon xoa nhung san pham nay?"
+      );
+      if (!isConfirm) {
+        return;
+      }
+    }
     if (inputsChecked.length > 0) {
       let ids = [];
       const inputIds = formChangeMulti.querySelector("input[name='ids']");
@@ -119,5 +128,3 @@ if (formChangeMulti) {
   });
 }
 //End Form Change Multi
-
-
