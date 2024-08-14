@@ -118,7 +118,14 @@ if (formChangeMulti) {
         // const id = input.getAttribute("value");
         //value la thuoc tinh co san nen khong can getAttribute van duoc
         const id = input.value;
-        ids.push(id);
+        if (typeChoice == "change-position") {
+          const position = input
+            .closest("tr")
+            .querySelector("input[name='position']").value;
+          ids.push(`${id}-${position}`);
+        } else {
+          ids.push(id);
+        }
       });
       inputIds.value = ids.join(", ");
       formChangeMulti.submit();
