@@ -1,32 +1,25 @@
 const Product = require("../../models/product.model");
-
 const filterStatusHelper = require("../../helpers/filterstatus");
-
 const searchHelper = require("../../helpers/search");
-
 const paginationHelper = require("../../helpers/pagination");
 
 // [GET] /admin/products
 module.exports.index = async (req, res) => {
-  console.log(req.query.status);
+  // console.log(req.query.status);
+  // console.log("I'm here");
   let find = {
     deleted: false,
   };
-
   const filterStatus = filterStatusHelper(req.query);
-
   if (req.query.status) {
     find.status = req.query.status;
   }
-
   const objSearch = searchHelper(req.query);
   if (objSearch.regex) {
     find.title = objSearch.regex;
   }
-
   //Pagination
   const countProduct = await Product.countDocuments(find);
-
   let objPagination = paginationHelper(
     {
       currentPage: 1,
@@ -36,13 +29,12 @@ module.exports.index = async (req, res) => {
     countProduct
   );
   //End Pagination
-
   const products = await Product.find(find)
     .sort({ position: "desc" })
     .limit(objPagination.limitItem)
     .skip(objPagination.skip);
 
-  console.log(products);
+  // console.log(products);
 
   res.render("admin/pages/products/index", {
     pageTitle: "Danh sach san pham",
@@ -71,17 +63,24 @@ module.exports.changeMulti = async (req, res) => {
   switch (type) {
     case "active":
       await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
-      req.flash("success", `Cap nhat trang thai cua ${ids.length} san pham thanh cong`);
+      req.flash(
+        "success",
+        `Cap nhat trang thai cua ${ids.length} san pham thanh cong`
+      );
       break;
     case "inactive":
       await Product.updateMany({ _id: { $in: ids } }, { status: "inactive" });
-      req.flash("success", `Cap nhat trang thai cua ${ids.length} san pham thanh cong`);
+      req.flash(
+        "success",
+        `Cap nhat trang thai cua ${ids.length} san pham thanh cong`
+      );
       break;
     case "delete-all":
       await Product.updateMany(
         { _id: { $in: ids } },
         { deleted: true, deletedAt: new Date() }
       );
+      req.flash("success", `Xoa ${ids.length} san pham thanh cong`);
       break;
     case "change-position":
       for (const item of ids) {
@@ -89,6 +88,7 @@ module.exports.changeMulti = async (req, res) => {
         position = parseInt(position);
         await Product.updateOne({ _id: id }, { position: position });
       }
+      req.flash("success", `Thay doi ${ids.length} san pham thanh cong`);
       break;
     default:
       break;
@@ -104,5 +104,6 @@ module.exports.deleteItem = async (req, res) => {
     { _id: id },
     { deleted: true, deletedAt: new Date() }
   );
+  req.flash("success", `Xoa san pham thanh cong`);
   res.redirect("back");
 };
