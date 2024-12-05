@@ -5,15 +5,17 @@ const paginationHelper = require("../../helpers/pagination");
 
 // [GET] /admin/products
 module.exports.index = async (req, res) => {
-  // console.log(req.query.status);
+  console.log(req.query.status);
   // console.log("I'm here");
   let find = {
     deleted: false,
   };
+
   const filterStatus = filterStatusHelper(req.query);
   if (req.query.status) {
     find.status = req.query.status;
   }
+
   const objSearch = searchHelper(req.query);
   if (objSearch.regex) {
     find.title = objSearch.regex;
@@ -29,6 +31,7 @@ module.exports.index = async (req, res) => {
     countProduct
   );
   //End Pagination
+
   const products = await Product.find(find)
     .sort({ position: "desc" })
     .limit(objPagination.limitItem)

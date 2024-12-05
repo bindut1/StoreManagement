@@ -11,6 +11,8 @@ if (buttonChangeStatus.length > 0) {
       // console.log(statusCurrent);
       // console.log(id);
       // console.log(statusChange);
+
+      //dung method_override de ghi de tu POST -> PATCH
       const action = path + `/${statusChange}/${id}?_method=PATCH`;
       formChangeStatus.action = action;
       formChangeStatus.submit();

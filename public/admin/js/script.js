@@ -23,6 +23,7 @@ const formSearch = document.querySelector("#form-search");
 if (formSearch) {
   let url = new URL(window.location.href);
   formSearch.addEventListener("submit", (e) => {
+    //khoi load lai trang, vi su kien submit load lai trang hoac chuyen den 1 trang moi
     e.preventDefault();
     // console.log(e.target.elements.keyword.value);
     const keyword = e.target.elements.keyword.value;
@@ -111,6 +112,10 @@ if (formChangeMulti) {
         return;
       }
     }
+    // const test = document.querySelectorAll("input[name='position']");
+    // test.forEach((ind) => {
+    //   console.log(ind.value);
+    // });
     if (inputsChecked.length > 0) {
       let ids = [];
       const inputIds = formChangeMulti.querySelector("input[name='ids']");
