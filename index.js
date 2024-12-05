@@ -20,9 +20,10 @@ const routeAdmin = require("./routes/admin/index.route");
 const database = require("./config/database");
 database.connect();
 
-app.set("views", "./views");
+app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
-app.use(express.static("public"));
+console.log(__dirname);
+app.use(express.static(`${__dirname}/public`));
 
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
