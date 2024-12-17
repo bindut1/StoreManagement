@@ -21,3 +21,24 @@ module.exports.index = async (req, res) => {
     products: newProducts,
   });
 };
+
+// [GET] /products/:slug
+module.exports.detail = async (req, res) => {
+  // console.log(req.params.slug);
+  try {
+    const find = {
+      deleted: false,
+      slug: req.params.slug,
+      status: "active",
+    };
+    const product = await Product.findOne(find);
+    console.log(product);
+    res.render("client/pages/products/detail", {
+      pageTitle: product.title,
+      product: product,
+    });
+  } catch (error) {
+    req.flash("error", `Ma san pham khong ton tai`);
+    res.redirect(`/products`);
+  }
+};
