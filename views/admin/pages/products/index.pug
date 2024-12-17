@@ -9,6 +9,7 @@ include ../../mixins/alert.pug
 block main
 
     +alert-success(5000)
+    +alert-error(5000)
 
     h1 Danh sach san pham
 
@@ -90,8 +91,15 @@ block main
                                         button-change-status  
                                         class="badge bg-danger"
                                         ) Dung hoat dong
-                            td 
-                                button(class="btn btn-warning btn-sm") Sua 
+                            td  
+                                a(
+                                    href=`${prefixAdmin}/products/detail/${item.id}`
+                                    class="btn btn-secondary btn-sm"
+                                ) Chi tiet
+                                a(
+                                    href=`${prefixAdmin}/products/edit/${item.id}`
+                                    class="btn btn-warning btn-sm"
+                                ) Sua
                                 button(
                                     class="btn btn-danger btn-sm ml-l" 
                                     data-id=item.id
