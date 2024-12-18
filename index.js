@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
 
@@ -26,6 +27,13 @@ console.log(__dirname);
 app.use(express.static(`${__dirname}/public`));
 
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
+
+//TinyMCE
+app.use(
+  "/tinymce",
+  express.static(path.join(__dirname, "node_modules", "tinymce"))
+);
+// End TinyMCE
 
 // Flash
 app.use(cookieParser("JAHFJBDW"));
