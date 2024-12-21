@@ -33,8 +33,16 @@ module.exports.index = async (req, res) => {
   );
   //End Pagination
 
+  //Sort
+  let sort = {};
+
+  if (req.query.sortKey && req.query.sortValue) {
+    sort[req.query.sortKey] = req.query.sortValue;
+  }
+  //End Sort
+
   const products = await Product.find(find)
-    .sort({ position: "desc" })
+    .sort(sort)
     .limit(objPagination.limitItem)
     .skip(objPagination.skip);
 
@@ -187,3 +195,7 @@ module.exports.detail = async (req, res) => {
     res.redirect(`${systemConfig.prefixAdmin}/products`);
   }
 };
+
+//req.query: ?xxx=yyy&zzz=ttt...
+//req.params: /:id /:value
+//req.body: form
