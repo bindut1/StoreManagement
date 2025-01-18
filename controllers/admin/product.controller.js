@@ -159,10 +159,15 @@ module.exports.edit = async (req, res) => {
       _id: req.params.id,
     };
     const product = await Product.findOne(find);
-    console.log(product);
+    // const records = await ProductCategory.find({
+    //   deleted: false,
+    // });
+    // const newRecords = createTreeHelper.createTree(records);
+    // console.log(product);
     res.render("admin/pages/products/edit", {
       pageTitle: "Chinh sua san pham",
       product: product,
+      // category: newRecords,
     });
   } catch (error) {
     req.flash("error", `Ma san pham khong ton tai`);
