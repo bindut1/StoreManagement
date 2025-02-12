@@ -50,7 +50,7 @@ module.exports.index = async (req, res) => {
   // console.log(products);
 
   res.render("admin/pages/products/index", {
-    pageTitle: "Danh sach san pham",
+    pageTitle: "Danh sách sản phẩm",
     products: products,
     filterStatus: filterStatus,
     keyword: objSearch.keyword,
@@ -64,7 +64,7 @@ module.exports.changeStatus = async (req, res) => {
   const id = req.params.id;
   // console.log(status + " " + id);
   await Product.updateOne({ _id: id }, { status: status });
-  req.flash("success", "Cap nhat trang thai thanh cong!");
+  req.flash("success", "Cập nhật trạng thái thành công!");
   res.redirect("back");
   // res.send(`${status} - ${id}`);
 };
@@ -78,14 +78,14 @@ module.exports.changeMulti = async (req, res) => {
       await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
       req.flash(
         "success",
-        `Cap nhat trang thai cua ${ids.length} san pham thanh cong`
+        `Cập nhật trạng thái của ${ids.length} sản phẩm thành công`
       );
       break;
     case "inactive":
       await Product.updateMany({ _id: { $in: ids } }, { status: "inactive" });
       req.flash(
         "success",
-        `Cap nhat trang thai cua ${ids.length} san pham thanh cong`
+        `Cập nhật trạng thái của ${ids.length} sản phẩm thành công`
       );
       break;
     case "delete-all":
@@ -93,7 +93,7 @@ module.exports.changeMulti = async (req, res) => {
         { _id: { $in: ids } },
         { deleted: true, deletedAt: new Date() }
       );
-      req.flash("success", `Xoa ${ids.length} san pham thanh cong`);
+      req.flash("success", `Xóa ${ids.length} sản phẩm thành công`);
       break;
     case "change-position":
       for (const item of ids) {
@@ -101,7 +101,7 @@ module.exports.changeMulti = async (req, res) => {
         position = parseInt(position);
         await Product.updateOne({ _id: id }, { position: position });
       }
-      req.flash("success", `Thay doi ${ids.length} san pham thanh cong`);
+      req.flash("success", `Thay đổi ${ids.length} sản phẩm thành công`);
       break;
     default:
       break;
@@ -117,7 +117,7 @@ module.exports.deleteItem = async (req, res) => {
     { _id: id },
     { deleted: true, deletedAt: new Date() }
   );
-  req.flash("success", `Xoa san pham thanh cong`);
+  req.flash("success", `Xóa sản phẩm thành công`);
   res.redirect("back");
 };
 
@@ -129,7 +129,7 @@ module.exports.create = async (req, res) => {
   const records = await ProductCategory.find(find);
   const newRecords = createTreeHelper.createTree(records);
   res.render("admin/pages/products/create", {
-    pageTitle: "Them moi san pham",
+    pageTitle: "Thêm mới sản phẩm",
     category: newRecords,
   });
 };
@@ -159,18 +159,18 @@ module.exports.edit = async (req, res) => {
       _id: req.params.id,
     };
     const product = await Product.findOne(find);
-    // const records = await ProductCategory.find({
-    //   deleted: false,
-    // });
-    // const newRecords = createTreeHelper.createTree(records);
-    // console.log(product);
+    const records = await ProductCategory.find({
+      deleted: false,
+    });
+    const newRecords = createTreeHelper.createTree(records);
+    console.log(product);
     res.render("admin/pages/products/edit", {
-      pageTitle: "Chinh sua san pham",
+      pageTitle: "Chỉnh sửa sản phẩm",
       product: product,
-      // category: newRecords,
+      category: newRecords,
     });
   } catch (error) {
-    req.flash("error", `Ma san pham khong ton tai`);
+    req.flash("error", `Mã sản phẩm không tồn tại`);
     res.redirect(`${systemConfig.prefixAdmin}/products`);
   }
 };
@@ -203,7 +203,7 @@ module.exports.detail = async (req, res) => {
       product: product,
     });
   } catch (error) {
-    req.flash("error", `Ma san pham khong ton tai`);
+    req.flash("error", `Mã sản phẩm không tồn tại`);
     res.redirect(`${systemConfig.prefixAdmin}/products`);
   }
 };

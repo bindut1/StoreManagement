@@ -30,7 +30,7 @@ mixin table-tree(items, level = 1)
                         data-id=item.id 
                         button-change-status 
                         class="badge bg-success"
-                        ) Hoat dong
+                        ) Hoạt động
                 else 
                     a(
                         href="javascript:;"
@@ -38,20 +38,20 @@ mixin table-tree(items, level = 1)
                         data-id=item.id 
                         button-change-status  
                         class="badge bg-danger"
-                        ) Dung hoat dong
+                        ) Dừng hoạt động
             td  
                 a(
                     href=`${prefixAdmin}/products-category/detail/${item.id}`
                     class="btn btn-secondary btn-sm"
-                ) Chi tiet
+                ) Chi tiết
                 a(
                     href=`${prefixAdmin}/products-category/edit/${item.id}`
                     class="btn btn-warning btn-sm"
-                ) Sua
+                ) Sửa
                 button(
                     class="btn btn-danger btn-sm ml-l" 
                     data-id=item.id
                     button-delete
-                    ) Xoa 
+                    ) Xóa 
         if item.children && item.children.length > 0
             +table-tree(item.children, level + 1)

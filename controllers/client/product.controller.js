@@ -38,7 +38,7 @@ module.exports.detail = async (req, res) => {
       product: product,
     });
   } catch (error) {
-    req.flash("error", `Ma san pham khong ton tai`);
+    req.flash("error", `Mã sản phẩm không tồn tại`);
     res.redirect(`/products`);
   }
 };

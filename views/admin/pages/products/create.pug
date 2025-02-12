@@ -4,7 +4,7 @@ include ../../mixins/select-tree.pug
 
 block main 
     +alert-error(5000)
-    h1(class="mb-4") Them moi san pham 
+    h1(class="mb-4") Thêm mới sản phẩm
 
     form(
         action=`${prefixAdmin}/products/create`
@@ -13,7 +13,7 @@ block main
         enctype="multipart/form-data"
     )
         div(class="form-group")
-            label(for="title") Tieu de 
+            label(for="title") Tiêu đề
             input(
                 type="text"
                 class="form-control"
@@ -22,17 +22,17 @@ block main
                 require 
             )
         div(class="form-group")
-            label(for="product_category_id") Danh muc 
+            label(for="product_category_id") Danh mục
             select(
                 name="product_category_id",
                 id="product_category_id",
                 class="form-control"
             )
-                option(value="") -- Chon danh muc --
+                option(value="") -- Chọn danh mục --
                 if(category)
                     +select-tree(category) 
         div(class="form-group")
-            label(for="desc") Mo ta 
+            label(for="desc") Mô tả 
             textarea(
                 class="form-control mce"
                 id="desc"
@@ -40,7 +40,7 @@ block main
                 rows="5"
             )  
         div(class="form-group")
-            label(for="price") Gia
+            label(for="price") Giá
             input(
                 type="number"
                 class="form-control"
@@ -50,7 +50,7 @@ block main
                 min="0"
             ) 
         div(class="form-group")
-            label(for="discount") Phan tram giam gia
+            label(for="discount") Phần trăm giảm giá
             input(
                 type="number"
                 class="form-control"
@@ -60,7 +60,7 @@ block main
                 min="0"
             ) 
         div(class="form-group")
-            label(for="stock") So luong
+            label(for="stock") Số lượng
             input(
                 type="number"
                 class="form-control"
@@ -70,7 +70,7 @@ block main
                 min="0"
             )
         div(class="form-group" upload-image)
-            label(for="thumbnail") Anh
+            label(for="thumbnail") Ảnh
             input(
                 type="file"
                 class="form-control-file"
@@ -85,13 +85,13 @@ block main
                 class="image-preview"
             ) 
         div(class="form-group")
-            label(for="position") Vi tri
+            label(for="position") Vị trí
             input(
                 type="number"
                 class="form-control"
                 id="position"
                 name="position"
-                placeholder="Tu dong tang"
+                placeholder="Tự động tăng"
                 min="1"
             )
         div(class="form-group form-check form-check-inline")
@@ -103,7 +103,7 @@ block main
                 value="active"
                 checked
             )
-            label(for="statusActive" class="form-check-label") Hoat dong
+            label(for="statusActive" class="form-check-label") Hoạt động
         div(class="form-group form-check form-check-inline")
             input(
                 type="radio"
@@ -113,9 +113,9 @@ block main
                 value="inactive"
                 checked
             )
-            label(for="statusInActive" class="form-check-label") Dung hoat dong
+            label(for="statusInActive" class="form-check-label") Dừng hoạt động
         div(class="form-group")
             button(
                 type="submit"
                 class="btn btn-primary"
-            ) Tao moi
+            ) Tạo mới

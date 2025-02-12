@@ -1,17 +1,17 @@
 module.exports = (query) => {
   let filtersStatus = [
     {
-      name: "Tat ca",
+      name: "Tất cả",
       status: "",
       class: "",
     },
     {
-      name: "Hoat dong",
+      name: "Hoạt động",
       status: "active",
       class: "",
     },
     {
-      name: "Dung hoat dong",
+      name: "Dừng hoạt động",
       status: "inactive",
       class: "",
     },

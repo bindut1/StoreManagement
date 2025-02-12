@@ -4,7 +4,7 @@ include ../../mixins/select-tree.pug
 
 block main 
     +alert-error(5000)
-    h1(class="mb-4") Them moi san pham 
+    h1(class="mb-4") Thêm mới danh mục sản phẩm
 
     form(
         action=`${prefixAdmin}/products-category/create`
@@ -12,7 +12,7 @@ block main
         enctype="multipart/form-data"
     )
         div(class="form-group")
-            label(for="title") Tieu de 
+            label(for="title") Tiêu đề
             input(
                 type="text"
                 class="form-control"
@@ -21,17 +21,17 @@ block main
                 require 
             )
         div(class="form-group")
-            label(for="parent_id") Danh muc cha 
+            label(for="parent_id") Danh mục cha
             select(
                 name="parent_id",
                 id="parent_id",
                 class="form-control"
             )
-                option(value="") -- Chon danh muc cha --
+                option(value="") -- Chọn danh mục cha --
                 if(records)
                     +select-tree(records)
         div(class="form-group")
-            label(for="desc") Mo ta 
+            label(for="desc") Mô tả
             textarea(
                 class="form-control mce"
                 id="desc"
@@ -39,7 +39,7 @@ block main
                 rows="5"
             )  
         div(class="form-group" upload-image)
-            label(for="thumbnail") Anh
+            label(for="thumbnail") Ảnh
             input(
                 type="file"
                 class="form-control-file"
@@ -54,13 +54,13 @@ block main
                 class="image-preview"
             ) 
         div(class="form-group")
-            label(for="position") Vi tri
+            label(for="position") Vị trí
             input(
                 type="number"
                 class="form-control"
                 id="position"
                 name="position"
-                placeholder="Tu dong tang"
+                placeholder="Tự động tăng"
                 min="1"
             )
         div(class="form-group form-check form-check-inline")
@@ -72,7 +72,7 @@ block main
                 value="active"
                 checked
             )
-            label(for="statusActive" class="form-check-label") Hoat dong
+            label(for="statusActive" class="form-check-label") Hoạt động
         div(class="form-group form-check form-check-inline")
             input(
                 type="radio"
@@ -82,9 +82,9 @@ block main
                 value="inactive"
                 checked
             )
-            label(for="statusInActive" class="form-check-label") Dung hoat dong
+            label(for="statusInActive" class="form-check-label") Dừng hoạt động
         div(class="form-group")
             button(
                 type="submit"
                 class="btn btn-primary"
-            ) Tao moi
+            ) Tạo mới
