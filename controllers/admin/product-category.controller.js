@@ -64,13 +64,13 @@ module.exports.edit = async (req, res) => {
 
 // [PATCH] /admin/products-category/edit/:id
 module.exports.editPatch = async (req, res) => {
-  // const id = req.params.id;
-  // req.body.position = parseInt(req.body.position);
-  // await ProductCategory.updateOne(
-  //   {
-  //     _id: id,
-  //   },
-  //   req.body
-  // );
-  // res.redirect("back");
+  const id = req.params.id;
+  req.body.position = parseInt(req.body.position);
+  await ProductCategory.updateOne(
+    {
+      _id: id,
+    },
+    req.body
+  );
+  res.redirect("back");
 };
