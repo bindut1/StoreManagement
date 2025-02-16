@@ -1,6 +1,6 @@
 const Account = require("../../models/account.model");
-const systemConfig = require("../../config/system");
 const md5 = require("md5");
+const systemConfig = require("../../config/system");
 const Role = require("../../models/role.model");
 
 // [GET] /admin/accounts
