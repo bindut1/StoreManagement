@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
+const moment = require("moment");
 
 const flash = require("express-flash");
 const cookieParser = require("cookie-parser");
@@ -27,6 +28,7 @@ console.log(__dirname);
 app.use(express.static(`${__dirname}/public`));
 
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
+app.locals.moment = moment;
 
 //TinyMCE
 app.use(

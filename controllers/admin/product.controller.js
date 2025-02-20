@@ -1,4 +1,5 @@
 const Product = require("../../models/product.model");
+const Account = require("../../models/account.model");
 const ProductCategory = require("../../models/product-category.model");
 const filterStatusHelper = require("../../helpers/filterstatus");
 const searchHelper = require("../../helpers/search");
@@ -47,6 +48,14 @@ module.exports.index = async (req, res) => {
     .limit(objPagination.limitItem)
     .skip(objPagination.skip);
 
+  for (const product of products) {
+    const user = await Account.findOne({
+      _id: product.createdBy.account_id,
+    });
+    if (user) {
+      product.accountFullname = user.fullName;
+    }
+  }
   // console.log(products);
 
   res.render("admin/pages/products/index", {
@@ -91,7 +100,13 @@ module.exports.changeMulti = async (req, res) => {
     case "delete-all":
       await Product.updateMany(
         { _id: { $in: ids } },
-        { deleted: true, deletedAt: new Date() }
+        {
+          deleted: true,
+          deletedBy: {
+            account_id: res.locals.user.id,
+            deletedAt: new Date(),
+          },
+        }
       );
       req.flash("success", `Xóa ${ids.length} sản phẩm thành công`);
       break;
@@ -115,7 +130,13 @@ module.exports.deleteItem = async (req, res) => {
   // await Product.deleteOne({ _id: id });
   await Product.updateOne(
     { _id: id },
-    { deleted: true, deletedAt: new Date() }
+    {
+      deleted: true,
+      deletedBy: {
+        account_id: res.locals.user.id,
+        deletedAt: new Date(),
+      },
+    }
   );
   req.flash("success", `Xóa sản phẩm thành công`);
   res.redirect("back");
@@ -145,6 +166,9 @@ module.exports.createPost = async (req, res) => {
   } else {
     req.body.position = parseInt(req.body.position);
   }
+  req.body.createdBy = {
+    account_id: res.locals.user.id,
+  };
   const product = new Product(req.body);
   await product.save();
   res.redirect(`${systemConfig.prefixAdmin}/products`);

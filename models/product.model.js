@@ -22,11 +22,21 @@ const productSchema = new mongoose.Schema(
       slug: "title",
       unique: true,
     },
-    deleted: {
-      type: Boolean,
-      default: false,
+    createdBy: {
+      account_id: String,
+      createdAt: {
+        type: Date,
+        default: Date.now(),
+      },
     },
-    deletedAt: Date,
+    deleted:{
+      type: Boolean,
+      default: false
+    },
+    deletedBy: {
+      account_id: String,
+      deletedAt: Date,
+    },
   },
   {
     timestamps: true,
