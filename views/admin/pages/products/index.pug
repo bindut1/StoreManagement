@@ -59,6 +59,7 @@ block main
                             if(role.permissions.includes("products_edit")) 
                                 th Trạng thái 
                             th Người tạo
+                            th Người cập nhật
                             th Hành động 
 
                     tbody 
@@ -107,6 +108,10 @@ block main
                                     p #{item.accountFullname}
                                     p 
                                         +formatDateTime(item.createdBy.createdAt)
+                                td 
+                                    p #{item.accountUpdatedFullname}
+                                    p 
+                                        +formatDateTime(item.updatedBy.updatedAt)
                                 td  
                                     a(
                                         href=`${prefixAdmin}/products/detail/${item.id}`
