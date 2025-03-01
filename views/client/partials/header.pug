@@ -6,7 +6,7 @@ header.header
       .col-3 
         .inner-logo 
           a(href='/')
-            img(src="https://res-console.cloudinary.com/dwagbc0yg/media_explorer_thumbnails/ba8354de065f92753861d5e7857448cd/detailed" alt="Logo")
+            img(src=settingGeneral.logo alt=settingGeneral.websiteName)
 
       .col-5 
         form(
@@ -38,6 +38,8 @@ header.header
             li
               a(href="/cart") Giỏ hàng (#{miniCart ? miniCart.totalQuantity : 0})
             if(user)
+              li
+                a(href="/user/info") #{user.fullName}
               li
                 a(href="/user/logout") Đăng xuất
             else
