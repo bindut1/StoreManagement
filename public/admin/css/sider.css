@@ -1,0 +1,46 @@
+.sider {
+    width: 250px;
+    font-weight: 500;
+    background-color: #2c3e50;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .inner-menu {
+    padding: 20px 0;
+  }
+  
+  .inner-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .inner-menu ul li {
+    margin-bottom: 5px;
+  }
+  
+  .inner-menu ul li a {
+    display: block;
+    padding: 12px 20px;
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+  }
+  
+  .inner-menu ul li a:hover {
+    background-color: #34495e;
+    border-left: 3px solid #3498db;
+    padding-left: 25px;
+  }
+  
+  .inner-menu ul li a.active {
+    background-color: #34495e;
+    border-left: 3px solid #3498db;
+    font-weight: bold;
+  }
