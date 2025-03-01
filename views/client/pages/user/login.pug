@@ -1,6 +1,8 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 
+block head
+    link(rel="stylesheet" href="/css/user.css")
 block main 
     +alert-error(5000)
 

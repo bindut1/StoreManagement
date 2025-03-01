@@ -1,25 +1,6 @@
-.header {
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
-}
-
 .header .inner-logo img {
-  max-height: 50px;
+  max-height: 80px;
   max-width: 100%;
-}
-
-.header .inner-menu > ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-items: flex-end;
-  flex-wrap: wrap;
-}
-
-.header .inner-menu > ul > li {
-  margin-left: 20px;
 }
 
 .footer {
@@ -87,7 +68,7 @@
   border-radius: 8px;
 }
 
-.sub-menu{
+/* .sub-menu{
   position: relative;
   z-index: 999
 }
@@ -124,7 +105,7 @@
 
 .sub-menu ul li:hover > ul {
   display: block;
-}
+} */
 
 .product-item .inner-featured {
   position: absolute;
@@ -232,3 +213,47 @@
 
 }
 /* End Show Alert */
+
+
+/*  CSS dùng chung cho box-head */
+.box-head {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px;
+  color: #333;
+  border-bottom: 3px solid #007bff;
+  margin-bottom: 20px;
+}
+
+/*  CSS dùng chung cho product-grid */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/*  CSS dùng chung cho từng sản phẩm */
+.product-item {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-item:hover {
+  transform: translateY(-5px);
+}
+
+.inner-image img {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.product-item:hover .inner-image img {
+  transform: scale(1.1);
+}

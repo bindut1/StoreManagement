@@ -1,2 +1,19 @@
-footer.footer 
-    | #{settingGeneral.copyright}
+link(rel="stylesheet" href="/css/footer.css")
+footer.footer
+  .footer-container
+    .footer-section
+      h3 About Us
+      p Chúng tôi là một website cung cấp sản phẩm cho người dùng
+    .footer-section
+      h3 Contact
+      ul
+        li Email: #{settingGeneral.email}
+        li Phone: #{settingGeneral.phone}
+    .footer-section
+      h3 Follow Us
+      ul.social-links
+        li: a(href="#") Facebook
+        li: a(href="#") Twitter
+        li: a(href="#") Instagram
+  .footer-bottom
+    p &copy; #{settingGeneral.copyright}
