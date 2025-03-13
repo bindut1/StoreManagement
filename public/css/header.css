@@ -1,149 +1,95 @@
-/* Main Header Styles */
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
+  padding: 15px 0;
+  background-color: #ffffff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-/* Logo Styling */
-.inner-logo {
-  display: flex;
-  align-items: center;
-  height: 100%;
 }
 
 .inner-logo img {
   max-height: 50px;
-  width: auto;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .inner-logo img:hover {
-  opacity: 0.9;
+  transform: scale(1.05);
 }
 
 /* Search Form Styling */
-.header form {
-  position: relative;
-  width: auto;
-  margin-left: -80px;
-  margin-right: 160px; 
-  flex-shrink: 0; 
-}
 
-.header .form-group {
+/* Chỉ tác động đến form tìm kiếm trong header */
+.search-form .form-group {
+  margin-left: -150px;
+  padding-right: 150px;
   margin-bottom: 0;
   position: relative;
 }
 
-.header .form-control {
-  height: 45px;
-  border-radius: 25px 0 0 25px;
-  padding-left: 20px;
-  border: 1px solid #e0e0e0;
-  border-right: none;
+
+.form-control {
+  border: 1px solid #ddd;
+  height: auto;
   box-shadow: none;
-  transition: all 0.3s;
-  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
-.header .form-control:focus {
+.form-control:focus {
   border-color: #007bff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.1);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-.header .btn-primary {
-  height: 45px;
-  border-radius: 0 25px 25px 0;
-  padding: 0 20px;
+.form-group button {
+  padding: 10px 20px;
   background-color: #007bff;
-  border-color: #007bff;
-  font-weight: 500;
-  transition: all 0.3s;
+  border: none;
+  transition: background-color 0.3s ease;
 }
 
-.header .btn-primary:hover {
-  background-color: #0069d9;
-  border-color: #0062cc;
-  transform: translateX(2px);
+.form-group button:hover {
+  background-color: #0056b3;
 }
 
-/* Main Navigation Styling */
-.inner-menu {
-  display: flex;
-  justify-content: flex-end;
-  height: 100%;
-}
-
+/* Menu Styling */
 .inner-menu ul {
   display: flex;
-  align-items: center;
-  flex-wrap: nowrap; 
-  list-style-type: none;
+  list-style: none;
   margin: 0;
-  padding: 0;
-  height: 100%;
+  padding: 0px;
+  justify-content: flex-end;
+  flex-wrap: nowrap; /* Thêm dòng này */
+  align-items: center; /* Thêm dòng này */
 }
 
-.inner-menu > ul > li {
+.inner-menu ul li {
+  margin-left: 15px;
   position: relative;
-  margin-left: 25px;
-  display: flex;
-  align-items: center;
-  height: 100%;
-  white-space: nowrap; 
+  white-space: nowrap; /* Thêm dòng này */
 }
 
-.inner-menu li a {
-  color: #444;
+.inner-menu ul li a {
+  color: #333;
   text-decoration: none;
   font-weight: 500;
-  font-size: 15px;
-  transition: all 0.3s;
+  padding: 5px 10px;
   display: block;
-  padding: 10px 0;
+  transition: all 0.3s ease;
 }
 
-.inner-menu > ul > li > a {
-  position: relative;
-}
-
-.inner-menu > ul > li > a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #007bff;
-  transition: width 0.3s ease;
-}
-
-.inner-menu > ul > li > a:hover::after {
-  width: 100%;
-}
-
-.inner-menu li a:hover {
+.inner-menu ul li a:hover {
   color: #007bff;
 }
 
-/* Top-level dropdown indicator */
-.sub-menu > a::after {
-  content: "▼";
-  font-size: 10px;
-  margin-left: 6px;
-  display: inline-block;
-  vertical-align: middle;
-  transition: transform 0.2s ease;
+/* Sub-menu Styling */
+.sub-menu {
+  position: relative;
+  z-index: 999;
 }
 
-/* First level dropdown */
+.sub-menu > a:after {
+  content: '▼';
+  font-size: 8px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
 .sub-menu ul {
   position: absolute;
   right: 0;
@@ -151,75 +97,103 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  background: white;
-  min-width: 220px;
+  background: #ffffff;
+  min-width: 200px;
   display: none;
-  border-radius: 6px;
+  border-radius: 4px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.2s ease-in-out;
-  flex-direction: column;
-  align-items: stretch;
+  animation: fadeIn 0.3s ease;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+.sub-menu ul li {
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid #f0f0f0;
+  display: block;
+  width: 100%;
+}
+
+.sub-menu ul li:last-child {
+  border-bottom: none;
+}
+
+.sub-menu ul li a {
+  padding: 10px 15px;
+  display: block;
+  color: #333;
+  transition: all 0.2s ease;
 }
 
 .sub-menu ul li a:hover {
   background-color: #f8f9fa;
-  border-left: 3px solid #007bff;
   color: #007bff;
-  padding-left: 20px;
 }
 
 .sub-menu:hover > ul {
   display: block;
 }
 
-/* Second level and deeper dropdowns */
+.sub-menu ul li {
+  position: relative;
+}
+
 .sub-menu ul li ul {
   right: 100%;
   top: 0;
-  border-radius: 6px;
-  box-shadow: -3px 3px 15px rgba(0, 0, 0, 0.1);
-  animation: slideIn 0.2s ease-in-out;
-}
-
-@keyframes slideIn {
-  from { opacity: 0; transform: translateX(10px); }
-  to { opacity: 1; transform: translateX(0); }
 }
 
 .sub-menu ul li:hover > ul {
   display: block;
 }
 
-/* Cart Styling */
-.inner-menu li a[href="/cart"] {
+/* For items with sub-menus (second level) */
+.sub-menu ul li.has-submenu > a:after {
+  content: '◀';
+  font-size: 8px;
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Cart highlight */
+.inner-menu ul li a[href="/cart"] {
+  position: relative;
+}
+
+.inner-menu ul li a[href="/cart"]:hover {
   color: #007bff;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
 }
 
-.inner-menu li a[href="/cart"]::before {
-  content: "🛒";
-  margin-right: 5px;
-  font-size: 16px;
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .inner-menu ul {
+    flex-wrap: wrap;
+  }
+  
+  .inner-menu ul li {
+    margin-bottom: 5px;
+  }
 }
 
-/* User Account Links */
-.inner-menu li a[href="/user/info"] {
-  color: #28a745;
-  font-weight: 600;
-}
-
-.inner-menu li a[href="/user/logout"] {
-  color: #dc3545;
-}
-
-.inner-menu li a[href="/user/login"],
-.inner-menu li a[href="/user/register"] {
-  color: #495057;
+@media (max-width: 768px) {
+  .header .row {
+    flex-direction: column;
+  }
+  
+  .col-3, .col-5, .col-4 {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+    margin-bottom: 15px;
+  }
+  
+  .inner-menu ul {
+    justify-content: center;
+  }
 }

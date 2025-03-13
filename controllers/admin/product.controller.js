@@ -191,7 +191,8 @@ module.exports.createPost = async (req, res) => {
   req.body.discountPercentage = parseInt(req.body.discountPercentage);
   req.body.stock = parseInt(req.body.stock);
   if (req.body.position == "") {
-    req.body.position = (await Product.countDocuments()) + 1;
+    const maxPositionRecord = await Product.findOne().sort({ position: -1 });
+    req.body.position = maxPositionRecord ? maxPositionRecord.position + 1 : 1;
     // console.log(req.body.position);
   } else {
     req.body.position = parseInt(req.body.position);
@@ -236,7 +237,6 @@ module.exports.editPatch = async (req, res) => {
   req.body.discountPercentage = parseInt(req.body.discountPercentage);
   req.body.stock = parseInt(req.body.stock);
   req.body.position = parseInt(req.body.position);
-  if (req.file) req.body.thumbnail = `/uploads/${req.file.filename}`;
   try {
     const updatedBy = {
       account_id: res.locals.user.id,
@@ -246,7 +246,7 @@ module.exports.editPatch = async (req, res) => {
       { _id: req.params.id },
       { ...req.body, $push: { updatedBy: updatedBy } }
     );
-  } catch (error) {}
+  } catch (error) { }
   res.redirect("back");
 };
 

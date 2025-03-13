@@ -32,10 +32,11 @@ module.exports.create = async (req, res) => {
 
 // [POST] /admin/products-category/create
 module.exports.createPost = async (req, res) => {
-  const permission = res.locals.role.permission;
+  const permission = res.locals.role.permissions;
   if (permission.includes("products-category_create")) {
     if (req.body.position == "") {
-      req.body.position = (await ProductCategory.countDocuments()) + 1;
+      const maxPositionRecord = await ProductCategory.findOne().sort({ position: -1 });
+      req.body.position = maxPositionRecord ? maxPositionRecord.position + 1 : 1;
       // console.log(req.body.position);
     } else {
       req.body.position = parseInt(req.body.position);

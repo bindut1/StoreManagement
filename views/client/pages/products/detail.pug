@@ -4,11 +4,6 @@ include ../../mixins/box-head.pug
 block main
   .product-detail
     .container.my-5
-      button(
-        class="btn btn-secondary mb-5"
-        button-go-back
-      ) Trở lại
-
       .row
         .col-6
           .inner-thumb
@@ -30,27 +25,28 @@ block main
 
           if (product.discountPercentage)
             div(class="inner-percent") Giảm tới: <span>#{product.discountPercentage}%</span>
-
-          if (product.stock)
+          
+          if(product.stock)
             div(class="inner-stock") Còn lại: <span>#{product.stock}</span> Sản phẩm
-
-          form(
-            action=`/cart/add/${product.id}`
-            method="POST"
-          ) 
-            input(
-              class="form-control mb-2"
-              type="number"
-              name="quantity"
-              value="1"
-              min="1"
-              max=product.stock
-            )
-            button(
-              type="submit"
-              class="btn btn-success btn-block"
-            ) Thêm vào giỏ hàng
-
+          if(product.stock > 0)
+            form(
+              action=`/cart/add/${product.id}`
+              method="POST"
+            ) 
+              input(
+                class="form-control mb-2"
+                type="number"
+                name="quantity"
+                value="1"
+                min="1"
+                max=product.stock
+              )
+              button(
+                type="submit"
+                class="btn btn-success btn-block"
+              ) Thêm vào giỏ hàng
+          else 
+            h5 Sản phẩm tạm thời hết hàng
     hr
 
     .container.my-5 

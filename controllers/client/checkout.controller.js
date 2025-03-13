@@ -58,12 +58,19 @@ module.exports.order = async (req, res) => {
 
     const productInfo = await Product.findOne({
       _id: product.product_id,
-    }).select("price discountPercentage");
+    }).select("price discountPercentage stock");
 
     objectProduct.price = productInfo.price;
     objectProduct.discountPercentage = productInfo.discountPercentage;
 
     products.push(objectProduct);
+
+    // Reduce product stock after order
+    const newStock = productInfo.stock - product.quantity;
+    await Product.updateOne(
+      { _id: product.product_id },
+      { stock: newStock > 0 ? newStock : 0 }
+    );
   }
 
   const objectOrder = {
@@ -104,6 +111,7 @@ module.exports.success = async (req, res) => {
     (sum, item) => sum + item.totalPrice,
     0
   );
+
   res.render("client/pages/checkout/success", {
     pageTitle: "Đặt hàng thành công",
     order: order,
