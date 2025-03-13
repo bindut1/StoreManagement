@@ -18,7 +18,7 @@
 /* Chỉ tác động đến form tìm kiếm trong header */
 .search-form .form-group {
   margin-left: -150px;
-  padding-right: 150px;
+  padding-right: 230px;
   margin-bottom: 0;
   position: relative;
 }
