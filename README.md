@@ -97,26 +97,6 @@ product-management/
 
 ## Development
 
-### Run in Development Mode
-```bash
-npm run dev
-```
-
-### Linting
-Ensure code quality using ESLint:
-```bash
-npm run lint
-```
-
-## Deployment
-
-### Docker
-Build and run the application using Docker:
-```bash
-docker build -t product-management .
-docker run -p 3000:3000 product-management
-```
-
 ### Vercel
 The project includes a `vercel.json` file for deployment on Vercel.
 
